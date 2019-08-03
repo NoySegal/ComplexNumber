@@ -1,7 +1,10 @@
+import java.lang.Math;
+
 public class ComplexNumber {
 
     private double re;
     private double im;
+    private static double EPSILON = 0.001;
 
     public ComplexNumber(double realPart, double imaginaryPart) {
         this.re = realPart;
@@ -35,6 +38,27 @@ public class ComplexNumber {
         double newIm = (this.im * other.re - this.re * other.im) / denominator;
         ComplexNumber result = new ComplexNumber(newRe, newIm);
         return result;
+    }
+
+    public double getRealPart() {
+        return this.re;
+    }
+
+    public double getImaginaryPart() {
+        return this.im;
+    }
+
+    public double getRadius() {
+        return Math.sqrt(this.re * this.re + this.im * this.im);
+    }
+
+    public double getArgument() {
+        return Math.atan2(this.re, this.im);
+    }
+
+    public boolean almostEquals(ComplexNumber other) {
+        double difference = Math.abs(this.getRadius() - other.getRadius());
+        return difference < EPSILON;
     }
 
     public static void main(String[] args) {
